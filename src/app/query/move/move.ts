@@ -1,6 +1,6 @@
 import { HttpConfig } from "../../../config/http/http.config";
 import { HttpService } from "../../service/http/http.service";
-import { GetMoveParams, GetMoveResponse } from "./get-move.i";
+import { GetMoveParams, GetMoveResponse } from "./move.i";
 
 export class GetMove {
   private httpConfig;

@@ -1,9 +1,6 @@
 import { Request } from "express";
-import { GetMove } from "../../query/get-move/get-move";
-import {
-  GetMoveParams,
-  GetMoveResponse,
-} from "../../query/get-move/get-move.i";
+import { GetMove } from "../../query/move/move";
+import { GetMoveParams, GetMoveResponse } from "../../query/move/move.i";
 
 const query = new GetMove();
 

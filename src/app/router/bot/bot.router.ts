@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { BotController } from "../../controller/bot/bot.controller";
-import { GetMoveResponse } from "../../query/get-move/get-move.i";
+import { GetMoveResponse } from "../../query/move/move.i";
 import { guard, isValid } from "./bot.guard";
 
 const router = express.Router();
