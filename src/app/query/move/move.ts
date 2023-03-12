@@ -1,6 +1,6 @@
 import { HttpConfig } from "../../../config/http/http.config";
 import { HttpService } from "../../service/http/http.service";
-import { GetMoveParams, GetMoveResponse } from "./move.i";
+import { GetMoveParams, GetMoveResult } from "./move.i";
 
 export class GetMove {
   private httpConfig;
@@ -11,12 +11,12 @@ export class GetMove {
     this.httpService = new HttpService();
   }
 
-  async get(params: GetMoveParams): Promise<GetMoveResponse> {
+  async get(params: GetMoveParams): Promise<GetMoveResult> {
     const url = this.httpConfig.getConfig().bot.getMove;
 
     return await this.httpService
       .get(url, params)
-      .then((data: GetMoveResponse) => {
+      .then((data: GetMoveResult) => {
         return data;
       })
       .catch((e) => {

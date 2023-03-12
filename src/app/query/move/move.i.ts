@@ -1,4 +1,4 @@
-export interface GetMoveResponse {
+export interface GetMoveResult {
   fen: string;
   move: string;
   isCheckmate: boolean;

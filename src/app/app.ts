@@ -4,14 +4,23 @@ import { AppConfig } from "../config/app/config";
 
 import * as botRouter from "./router/bot/bot.router";
 import * as boardRouter from "./router/board/board.router";
+import { LoggerService } from "./service/logger/logger";
 
-dotenv.config();
-const app = express();
-const config = new AppConfig();
+class App {
+  private app = express();
+  private config = new AppConfig();
+  private logger = new LoggerService();
 
-app.use(botRouter.default);
-app.use(boardRouter.default);
+  constructor() {
+    dotenv.config();
 
-app.listen(config.port, () => {
-  console.log(`Listening on port: ${config.port}`);
-});
+    this.app.use(botRouter.default);
+    this.app.use(boardRouter.default);
+
+    this.app.listen(this.config.port, () => {
+      this.logger.info(`Listening on port: ${this.config.port}`);
+    });
+  }
+}
+
+new App();
