@@ -10,3 +10,12 @@ export type GetMoveResponse = Response<
     }
   >
 >;
+
+export type CheckValidMoveResponse = Response<
+  Record<
+    any,
+    {
+      isValidMove: boolean;
+    }
+  >
+>;
