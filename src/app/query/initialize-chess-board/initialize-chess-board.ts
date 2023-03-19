@@ -1,5 +1,6 @@
 import { HttpConfig } from "../../../config/http/http.config";
 import { HttpService } from "../../service/http/http.service";
+import { GetInitializeChessBoardResponse } from "./initialize-chess-board.i";
 
 export class InitializeChessBoard {
   private httpConfig;
@@ -10,13 +11,15 @@ export class InitializeChessBoard {
     this.httpService = new HttpService();
   }
 
-  async get(): Promise<string> {
+  async get(): Promise<GetInitializeChessBoardResponse> {
     const url = this.httpConfig.getConfig().bot.initializeChessBoard;
 
     return await this.httpService
       .get(url)
       .then((data: string) => {
-        return data;
+        return {
+          fen: data,
+        };
       })
       .catch((e) => {
         throw new Error(e);
