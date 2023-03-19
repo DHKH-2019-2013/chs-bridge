@@ -1,6 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import { AppConfig } from "../config/app/app.config";
+import cors from "cors";
 
 import * as botRouter from "./router/bot/bot.router";
 import * as boardRouter from "./router/board/board.router";
@@ -13,6 +14,7 @@ class App {
 
   constructor() {
     dotenv.config();
+    this.app.use(cors);
 
     this.app.use(botRouter.default);
     this.app.use(boardRouter.default);
