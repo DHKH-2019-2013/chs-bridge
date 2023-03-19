@@ -14,7 +14,7 @@ class App {
 
   constructor() {
     dotenv.config();
-    this.app.use(cors);
+    this.app.use(cors());
 
     this.app.use(botRouter.default);
     this.app.use(boardRouter.default);
