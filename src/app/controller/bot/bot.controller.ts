@@ -20,11 +20,11 @@ export class BotController {
     return await this.query
       .get(params)
       .then((response: GetMoveResult) => {
-        this.logger.info(`Response GET /move: ${response}`);
+        this.logger.info("Response GET /move: ", response);
         return res.send(response);
       })
       .catch((e) => {
-        this.logger.error(`Error GET /move: ${e}`);
+        this.logger.error("Error GET /move: ", e);
         if (e.message.search("invalidMove")) return res.status(400).send(e.message);
         return res.status(500).send(e);
       });
@@ -41,11 +41,11 @@ export class BotController {
     return await this.query
       .checkValidMove(params)
       .then((response: CheckValidMoveResult) => {
-        this.logger.info(`Response GET /check-valid-move: ${response}`);
+        this.logger.info("Response GET /check-valid-move: ", response);
         return res.send(response);
       })
       .catch((e) => {
-        this.logger.error(`Error GET /check-valid-move: ${e}`);
+        this.logger.error("Error GET /check-valid-move: ", e);
         return res.status(500).send(e);
       });
   }

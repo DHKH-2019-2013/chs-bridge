@@ -20,7 +20,7 @@ class App {
     this.app.use(boardRouter.default);
 
     this.app.listen(this.config.port, () => {
-      this.logger.info(`Listening on port: ${this.config.port}`);
+      this.logger.info("Listening on port: ", this.config.port);
     });
   }
 }
