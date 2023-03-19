@@ -1,6 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
-import { AppConfig } from "../config/app/config";
+import { AppConfig } from "../config/app/app.config";
 
 import * as botRouter from "./router/bot/bot.router";
 import * as boardRouter from "./router/board/board.router";

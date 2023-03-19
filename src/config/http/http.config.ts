@@ -1,4 +1,4 @@
-import { AppConfig, IConfig } from "../app/config";
+import { AppConfig, IConfig } from "../app/app.config";
 import { IHttpConfig } from "./http.config.i";
 
 export class HttpConfig {
