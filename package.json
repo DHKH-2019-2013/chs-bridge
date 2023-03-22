@@ -1,5 +1,5 @@
 {
-  "name": "chs-bff",
+  "name": "chs-bridge",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,15 +13,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DHKH-2019-2013/chs-bff.git"
+    "url": "git+https://github.com/DHKH-2019-2013/chs-bridge.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DHKH-2019-2013/chs-bff/issues"
+    "url": "https://github.com/DHKH-2019-2013/chs-bridge/issues"
   },
-  "homepage": "https://github.com/DHKH-2019-2013/chs-bff#readme",
+  "homepage": "https://github.com/DHKH-2019-2013/chs-bridge#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
