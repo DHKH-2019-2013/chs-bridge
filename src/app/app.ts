@@ -1,11 +1,13 @@
 import express from "express";
 import * as dotenv from "dotenv";
-import { AppConfig } from "../config/app/app.config";
 import cors from "cors";
-
-import * as botRouter from "./router/bot/bot.router";
-import * as boardRouter from "./router/board/board.router";
+import http from "http";
+import { AppConfig } from "../config/app/app.config";
 import { LoggerService } from "./service/logger/logger";
+
+import * as botRouter from "./router/rest-api/bot/bot.router";
+import * as boardRouter from "./router/rest-api/board/board.router";
+import { SocketServer } from "./router/socket/socket";
 
 class App {
   private app = express();
@@ -19,7 +21,10 @@ class App {
     this.app.use(botRouter.default);
     this.app.use(boardRouter.default);
 
-    this.app.listen(this.config.port, () => {
+    const server = http.createServer(this.app);
+    new SocketServer(server);
+
+    server.listen(this.config.port, () => {
       this.logger.info("Listening on port: ", this.config.port);
     });
   }

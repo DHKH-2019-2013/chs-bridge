@@ -1,5 +1,5 @@
 import express from "express";
-import { BotController } from "../../controller/bot/bot.controller";
+import { BotController } from "../../../controller/bot/bot.controller";
 import { guard, isValid } from "./bot.guard";
 
 const router = express.Router();
