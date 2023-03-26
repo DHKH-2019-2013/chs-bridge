@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import { LoggerService } from "../../service/logger/logger";
-import { JoinRoomParams, RoomsDB } from "./socket.i";
+import { JoinRoomParams, RoomsDB, UpdateMoveParams } from "./socket.i";
 
 export class SocketServer {
   private roomsDB: RoomsDB = [];
@@ -18,10 +18,9 @@ export class SocketServer {
         socket.join(roomId);
         const room = this.roomsDB.find((room) => roomId === room.roomId);
         if (room) {
-          if (room.players.length < 2) room.players.push({ id: socket.id, name, isReady: false });
-          else if (room.players.length === 2) {
+          if (room.players.length < 2) room.players.push({ id: socket.id, name });
+          if (room.players.length === 2) {
             const moveFirst = Math.floor(Math.random() * 2);
-
             if (moveFirst === 0) {
               socket.to(roomId).emit("start-match", { side: true });
               socket.emit("start-match", { side: false });
@@ -39,11 +38,14 @@ export class SocketServer {
               {
                 id: socket.id,
                 name,
-                isReady: false,
               },
             ],
           });
         }
+      });
+
+      socket.on("update-move", ({ roomId, fen, move, isCheckmate }: UpdateMoveParams) => {
+        socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate });
       });
 
       socket.on("disconnect", () => {

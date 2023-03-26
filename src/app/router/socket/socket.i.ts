@@ -3,11 +3,17 @@ export type RoomsDB = Array<{
   players: Array<{
     id: string;
     name: string;
-    isReady: boolean;
   }>;
 }>;
 
 export interface JoinRoomParams {
   roomId: string;
   name: string;
+}
+
+export interface UpdateMoveParams {
+  roomId: string;
+  fen: string;
+  move: string;
+  isCheckmate: boolean;
 }

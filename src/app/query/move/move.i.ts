@@ -16,5 +16,7 @@ export interface CheckValidMoveParams {
 }
 
 export interface CheckValidMoveResult {
+  fen?: string;
   isValidMove: boolean;
+  isCheckmate?: boolean;
 }
