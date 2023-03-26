@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import { LoggerService } from "../../service/logger/logger";
-import { JoinRoomParams, RoomsDB, UpdateMoveParams } from "./socket.i";
+import { ChatParams, JoinRoomParams, RoomsDB, UpdateMoveParams } from "./socket.i";
 
 export class SocketServer {
   private roomsDB: RoomsDB = [];
@@ -10,10 +10,6 @@ export class SocketServer {
     const io = new Server(server);
 
     io.on("connection", (socket) => {
-      socket.on("test", () => {
-        console.log(JSON.stringify(this.roomsDB));
-      });
-
       socket.on("join-board", ({ roomId, name }: JoinRoomParams) => {
         socket.join(roomId);
         const room = this.roomsDB.find((room) => roomId === room.roomId);
@@ -46,6 +42,10 @@ export class SocketServer {
 
       socket.on("update-move", ({ roomId, fen, move, isCheckmate }: UpdateMoveParams) => {
         socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate });
+      });
+
+      socket.on("chat", ({ roomId, message }: ChatParams) => {
+        socket.broadcast.to(roomId).emit("incoming-chat", { message });
       });
 
       socket.on("disconnect", () => {

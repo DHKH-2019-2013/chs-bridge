@@ -17,3 +17,8 @@ export interface UpdateMoveParams {
   move: string;
   isCheckmate: boolean;
 }
+
+export interface ChatParams {
+  roomId: string;
+  message: string;
+}
