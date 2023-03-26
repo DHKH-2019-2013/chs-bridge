@@ -8,6 +8,7 @@ export interface GetMoveResult {
   fen: string;
   move: string;
   isCheckmate: boolean;
+  isGameOver: boolean;
 }
 
 export interface CheckValidMoveParams {
@@ -19,4 +20,5 @@ export interface CheckValidMoveResult {
   fen?: string;
   isValidMove: boolean;
   isCheckmate?: boolean;
+  isGameOver?: boolean;
 }
