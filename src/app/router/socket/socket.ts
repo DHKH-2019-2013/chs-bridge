@@ -10,6 +10,10 @@ export class SocketServer {
     const io = new Server(server);
 
     io.on("connection", (socket) => {
+      socket.on("get-lobbies", () => {
+        socket.emit("return-lobbies", { roomsDB: this.roomsDB });
+      });
+
       socket.on("join-board", ({ roomId, name }: JoinRoomParams) => {
         socket.join(roomId);
         const room = this.roomsDB.find((room) => roomId === room.roomId);
@@ -57,10 +61,7 @@ export class SocketServer {
         if (playerRoomIndex > -1) {
           const playerRoom = this.roomsDB[playerRoomIndex];
           playerRoom.players = playerRoom.players.filter((player) => player.id !== socket.id);
-          if (playerRoom.players.length === 1) {
-            // socket.to(roomId).broadcast.emit("endGame", "dis");
-          }
-          if (playerRoom.players.length === 0) {
+          if (playerRoom.players.length === 0 || playerRoom.players.length === 1) {
             this.roomsDB = this.roomsDB.filter((room) => room.roomId !== playerRoom?.roomId);
           }
         }
