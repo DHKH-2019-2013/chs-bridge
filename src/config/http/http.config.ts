@@ -11,7 +11,6 @@ export class HttpConfig {
   getConfig(): IHttpConfig {
     return {
       bot: {
-        initializeChessBoard: `${this.appConfig.botBaseUrl}/initialize-chess-board`,
         getMove: `${this.appConfig.botBaseUrl}/move`,
         checkValidMove: `${this.appConfig.botBaseUrl}/check-valid-move`,
       },

@@ -6,7 +6,6 @@ import { AppConfig } from "../config/app/app.config";
 import { LoggerService } from "./service/logger/logger";
 
 import * as botRouter from "./router/rest-api/bot/bot.router";
-import * as boardRouter from "./router/rest-api/board/board.router";
 import { SocketServer } from "./router/socket/socket";
 
 class App {
@@ -19,7 +18,6 @@ class App {
     this.app.use(cors());
 
     this.app.use(botRouter.default);
-    this.app.use(boardRouter.default);
 
     const server = http.createServer(this.app);
     new SocketServer(server);
