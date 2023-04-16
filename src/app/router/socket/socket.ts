@@ -44,8 +44,8 @@ export class SocketServer {
         }
       });
 
-      socket.on("update-move", ({ roomId, fen, move, isCheckmate }: UpdateMoveParams) => {
-        socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate });
+      socket.on("update-move", ({ roomId, fen, move, isCheckmate, promotionUnit }: UpdateMoveParams) => {
+        socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate, promotionUnit });
       });
 
       socket.on("chat", ({ roomId, message }: ChatParams) => {
