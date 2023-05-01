@@ -20,6 +20,10 @@ export class SocketServer {
         if (room) {
           if (room.players.length < 2) room.players.push({ id: socket.id, name });
           if (room.players.length === 2) {
+            if (!room.players.find((player) => player.id === socket.id)) {
+              socket.emit("redirect");
+            }
+
             const moveFirst = Math.floor(Math.random() * 2);
             if (moveFirst === 0) {
               socket.to(roomId).emit("start-match", { side: true });
@@ -52,11 +56,23 @@ export class SocketServer {
         socket.broadcast.to(roomId).emit("incoming-chat", { message });
       });
 
+      socket.on("surrender", () => {
+        let playerRoomIndex = this.roomsDB.findIndex((room) => {
+          return room.players.find((player) => player.id === socket.id) ? true : false;
+        });
+        // send notification
+        this.roomsDB[playerRoomIndex] &&
+          socket.broadcast.to(this.roomsDB[playerRoomIndex].roomId).emit("surrendered");
+      });
+
       socket.on("disconnect", () => {
         // find disconnected player room
         let playerRoomIndex = this.roomsDB.findIndex((room) => {
           return room.players.find((player) => player.id === socket.id) ? true : false;
         });
+        // send notification
+        this.roomsDB[playerRoomIndex] &&
+          socket.broadcast.to(this.roomsDB[playerRoomIndex].roomId).emit("disconnected");
         // update player in room
         if (playerRoomIndex > -1) {
           const playerRoom = this.roomsDB[playerRoomIndex];
