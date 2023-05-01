@@ -1,6 +1,5 @@
 export interface GetMoveParams {
   fen: string;
-  move: string;
   int: number;
 }
 

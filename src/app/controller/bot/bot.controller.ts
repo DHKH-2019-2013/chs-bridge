@@ -13,7 +13,6 @@ export class BotController {
 
     const params: GetMoveParams = {
       fen: req.query.fen as string,
-      move: req.query.move as string,
       int: Number(req.query.int),
     };
 
