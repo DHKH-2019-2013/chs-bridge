@@ -56,13 +56,16 @@ export class SocketServer {
         socket.broadcast.to(roomId).emit("incoming-chat", { message });
       });
 
-      socket.on("surrender", () => {
-        let playerRoomIndex = this.roomsDB.findIndex((room) => {
-          return room.players.find((player) => player.id === socket.id) ? true : false;
-        });
-        // send notification
-        this.roomsDB[playerRoomIndex] &&
-          socket.broadcast.to(this.roomsDB[playerRoomIndex].roomId).emit("surrendered");
+      socket.on("rematch", ({ roomId }) => {
+        roomId && socket.broadcast.to(roomId).emit("rematched");
+      });
+
+      socket.on("agreed-rematch", ({ roomId }) => {
+        roomId && io.to(roomId).emit("reload");
+      });
+
+      socket.on("surrender", ({ roomId }) => {
+        roomId && socket.broadcast.to(roomId).emit("surrendered");
       });
 
       socket.on("disconnect", () => {
