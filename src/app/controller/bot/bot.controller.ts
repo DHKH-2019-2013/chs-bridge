@@ -9,12 +9,14 @@ export class BotController {
   private logger = new LoggerService();
 
   async getMove(req: Request, res: Response): Promise<GetMoveResponse> {
-    this.logger.info("Enter GET /move");
+    this.logger.info("Enter GET /move", req.query);
 
     const params: GetMoveParams = {
       fen: req.query.fen as string,
-      int: Number(req.query.int),
+      elo: Number(req.query.elo),
     };
+
+    console.log(params);
 
     return await this.query
       .get(params)
@@ -30,7 +32,7 @@ export class BotController {
   }
 
   async checkValidMove(req: Request, res: Response): Promise<CheckValidMoveResponse> {
-    this.logger.info("Enter GET /check-valid-move");
+    this.logger.info("Enter GET /check-valid-move", req.query);
 
     const params: CheckValidMoveParams = {
       fen: req.query.fen as string,

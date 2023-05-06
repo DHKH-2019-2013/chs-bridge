@@ -2,11 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { query, validationResult } from "express-validator";
 
 export function guard() {
-  return [
-    query("fen").isString(),
-    query("move").isString(),
-    query("int").isNumeric(),
-  ];
+  return [query("fen").isString(), query("elo").isNumeric()];
 }
 
 export function isValid(req: Request, res: Response, next: NextFunction) {

@@ -1,6 +1,6 @@
 export interface GetMoveParams {
   fen: string;
-  int: number;
+  elo: number;
 }
 
 export interface GetMoveResult {
