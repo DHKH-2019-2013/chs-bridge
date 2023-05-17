@@ -48,9 +48,12 @@ export class SocketServer {
         }
       });
 
-      socket.on("update-move", ({ roomId, fen, move, isCheckmate, promotionUnit }: UpdateMoveParams) => {
-        socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate, promotionUnit });
-      });
+      socket.on(
+        "update-move",
+        ({ roomId, fen, move, isCheckmate, promotionUnit, enPassant }: UpdateMoveParams) => {
+          socket.to(roomId).emit("listen-update-move", { fen, move, isCheckmate, promotionUnit, enPassant });
+        }
+      );
 
       socket.on("chat", ({ roomId, message }: ChatParams) => {
         socket.broadcast.to(roomId).emit("incoming-chat", { message });

@@ -17,6 +17,7 @@ export interface UpdateMoveParams {
   move: string;
   isCheckmate: boolean;
   promotionUnit?: string;
+  enPassant?: Object;
 }
 
 export interface ChatParams {
